@@ -23,7 +23,7 @@ public class App {
 
         try {
 
-            String urlString = "http://ec2-52-11-184-249.us-west-2.compute.amazonaws.com:8983/solr/techproducts";
+            String urlString = "http://ec2-52-11-184-249.us-west-2.compute.amazonaws.com:8983/solr/hellosolr";
             SolrClient solr = new HttpSolrClient.Builder(urlString).build();
             System.out.println("connection built");
 
@@ -35,6 +35,7 @@ public class App {
             QueryResponse response = solr.query(query);
             SolrDocumentList list = response.getResults();
             System.out.println("responses collected");
+            System.out.println(             list.get(0).toString());
         } catch (SolrServerException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

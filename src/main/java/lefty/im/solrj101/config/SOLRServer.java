@@ -4,27 +4,35 @@ import java.util.ArrayList;
 
 public class SOLRServer {
 	// URL or IP address of the server
-	private String myServerName;
+	private String dnsName;
 	private int myPortNumber;
 	// Human name of the server
 	private String myHumanName;
 	private ArrayList<SOLRCore> cores = new ArrayList<SOLRCore>();  
 	
 	SOLRServer(String serverName){
-		myServerName=serverName;
+		dnsName=serverName;
 		myPortNumber=8983;
 	}
 	
-	SOLRServer(String serverName, int port){
-		myServerName=serverName;
+	SOLRServer(String dnsName, int port){
+		dnsName=dnsName;
 		myPortNumber=port;
+		myHumanName=dnsName;
 	}
+
+	SOLRServer(String humanName,String serverName, int port){
+		dnsName=serverName;
+		myPortNumber=port;
+		myHumanName=humanName;
+	}
+
 	
-	public String getServerName() {
-		return myServerName;
+	public String getDNSName() {
+		return dnsName;
 	}
-	public void setServerName(String myServerName) {
-		this.myServerName = myServerName;
+	public void setDNSName(String dnsName) {
+		this.dnsName = dnsName;
 	}
 	public int getPortNumber() {
 		return myPortNumber;

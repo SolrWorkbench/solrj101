@@ -8,11 +8,10 @@ package lefty.im.solrj101;
 public class App {
 
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
-
-		Utils101.connectAndQuery();
 		
-		Utils101.getCores();
+
+//		Utils101.connectAndQuery();
+		GetCores.getCores();
 
 	}
 

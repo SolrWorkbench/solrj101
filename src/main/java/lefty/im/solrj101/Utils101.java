@@ -57,10 +57,8 @@ class Utils101 {
 		try {
 			cores = request.process(solrClient);
 		} catch (SolrServerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

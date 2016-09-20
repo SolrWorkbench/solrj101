@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import lefty.im.solrj101.config.controls.NodeServer;
+
 import java.awt.GridBagLayout;
 import javax.swing.JSplitPane;
 import java.awt.GridBagConstraints;
@@ -119,8 +121,11 @@ public class MaintainServers extends JDialog {
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
 		
 		for(SOLRServer s:listServers){
-			String humanName=s.getHumanName();
-			root.add(new DefaultMutableTreeNode(humanName));
+			NodeServer nodeSrv=new NodeServer("server.png",s);
+			//String humanName=s.getHumanName();
+			//root.add(new DefaultMutableTreeNode(humanName));
+			
+			root.add(new DefaultMutableTreeNode(nodeSrv));
 		}
 		
 		treeServer = new JTree(root);

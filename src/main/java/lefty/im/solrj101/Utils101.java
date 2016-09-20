@@ -20,6 +20,12 @@ import org.apache.solr.client.solrj.response.CoreAdminResponse;
 class Utils101 {
 	
 	static String APOLLO = "http://ec2-52-11-184-249.us-west-2.compute.amazonaws.com:8983/solr/";
+	static String LOCAL = "http://localhost:8983/solr/";
+	
+	public static void main(String[] args) {
+		getCores();
+	}
+	
 	
 	public static void connectAndQuery() {
 		try {
@@ -47,7 +53,8 @@ class Utils101 {
 	public static void getCores() {
 		System.out.println("Solr server instance building Apollo");
 		
-		HttpSolrClient solrClient=new HttpSolrClient.Builder(APOLLO).build();
+		//HttpSolrClient solrClient=new HttpSolrClient.Builder(APOLLO).build();
+		HttpSolrClient solrClient=new HttpSolrClient.Builder(LOCAL).build();
 
 		System.out.println("Requesting core list"); 
 		CoreAdminRequest request = new CoreAdminRequest();

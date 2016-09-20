@@ -4,29 +4,51 @@ import java.util.ArrayList;
 
 public class SOLRServer {
 	// URL or IP address of the server
-	private String dnsName;
-	private int myPortNumber;
+	private String dnsName="";
+	private int myPortNumber=1983;
 	// Human name of the server
-	private String myHumanName;
+	private String myHumanName="";
 	private ArrayList<SOLRCore> cores = new ArrayList<SOLRCore>();  
 	
-	SOLRServer(String serverName){
+	public SOLRServer(String serverName){
 		dnsName=serverName;
 		myPortNumber=8983;
 	}
 	
-	SOLRServer(String dnsName, int port){
+	public SOLRServer(String dnsName, int port){
 		dnsName=dnsName;
 		myPortNumber=port;
 		myHumanName=dnsName;
 	}
 
-	SOLRServer(String humanName,String serverName, int port){
+	public SOLRServer(String humanName,String serverName, int port){
 		dnsName=serverName;
 		myPortNumber=port;
 		myHumanName=humanName;
 	}
 
+	
+	/**
+	 * detects the SOLR cores of the server
+	 * 
+	 * if dnsName=="" return false
+	 * in case of any exception return false
+	 * 
+	 * NOTE: initialize the human name of the core with the technical name (User will be able to edit it on the GUI)!
+	 * 
+	 * @return 
+	 *    true : if server can be reached and cores read in; private ArrayList<SOLRCore> cores is replaced by the resulted list
+	 *    false: in case of any problem; private ArrayList<SOLRCore> cores   is left unchanged
+	 */
+	public boolean buildCoreList(){
+		ArrayList<SOLRCore> detectedCores= new ArrayList<SOLRCore>();
+		
+		// TODO enter code here
+		
+		
+		return true;
+	}
+	
 	
 	public String getDNSName() {
 		return dnsName;

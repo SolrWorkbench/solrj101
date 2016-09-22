@@ -2,7 +2,11 @@ package lefty.im.solrj101.config;
 
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 final public class ManagedServers {
+	private final static Logger logger = LoggerFactory.getLogger( ManagedServers.class);
 
 	// make constructor private
 	private ManagedServers(){
@@ -11,6 +15,11 @@ final public class ManagedServers {
 	static private ArrayList<SOLRServer> managedServers = new ArrayList<SOLRServer>();
 	
 	public static Boolean ReadServerDataFromConfig(){
+		
+		logger.debug("ManagedServers.ReadServerDataFromConfig");
+		// forget previous status
+		managedServers = new ArrayList<SOLRServer>();
+		
 		SOLRServer s = new SOLRServer("helyben","localhost",8983);
 
 		// helyben
@@ -43,11 +52,12 @@ final public class ManagedServers {
 		return true;
 	}
 	
-	Boolean WriteServerData2Config(){
+	public static Boolean WriteServerData2Config(){
 		return true;
 	}
 
 	public static ArrayList<SOLRServer> getManagedServers() {
+		logger.debug("ManagedServers.getManagedServers");
 		return managedServers;
 	}
 

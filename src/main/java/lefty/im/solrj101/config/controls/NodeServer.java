@@ -4,21 +4,14 @@ import lefty.im.solrj101.config.SOLRServer;
 
 public class NodeServer {
 	
-	private SOLRServer representedSOLRServer;
+	private String serverHumanName;
 	private String nodeIcon;
 
-	public NodeServer(String nIcon, SOLRServer representedSrv){
+	public NodeServer(String nIcon, String humanName){
 		nodeIcon=nIcon;
-		representedSOLRServer=representedSrv;
+		serverHumanName=humanName;
 	}
 
-	public SOLRServer getRepresentedSOLRServer() {
-		return representedSOLRServer;
-	}
-
-	public void setRepresentedSOLRServer(SOLRServer representedSOLRServer) {
-		this.representedSOLRServer = representedSOLRServer;
-	}
 
 	public String getNodeIcon() {
 		return nodeIcon;
@@ -26,5 +19,15 @@ public class NodeServer {
 
 	public void setNodeIcon(String nodeIcon) {
 		this.nodeIcon = nodeIcon;
+	}
+
+
+	public String getServerHumanName() {
+		return serverHumanName;
+	}
+
+
+	public void setServerHumanName(String serverHumanName) {
+		this.serverHumanName = serverHumanName;
 	}
 }

@@ -8,12 +8,22 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import lefty.im.solrj101.config.MaintainServers;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 public class MainWindow {
 
+	private final static Logger logger = LoggerFactory.getLogger( MainWindow.class);
 	private JFrame frame;
+	//private final Action action = new SwingAction();
 
 	/**
 	 * Launch the application.
@@ -22,6 +32,7 @@ public class MainWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					logger.debug("Create MainWindow");
 					MainWindow window = new MainWindow();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -35,6 +46,7 @@ public class MainWindow {
 	 * Create the application.
 	 */
 	public MainWindow() {
+		logger.debug("Construct MainWindow");
 		initialize();
 	}
 
@@ -52,7 +64,20 @@ public class MainWindow {
 		JMenu mnFile = new JMenu("File");
 		mainMenuBar.add(mnFile);
 		
+		logger.debug("Initialize MainWindow");
 		JMenuItem mntmConfigureServers = new JMenuItem("Configure Servers");
+		mntmConfigureServers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					logger.debug("ActionListener activated: invoke MaintainServers()");
+					MaintainServers dialog = new MaintainServers();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		mnFile.add(mntmConfigureServers);
 		
 		JMenu mnHelp = new JMenu("Help");
@@ -71,5 +96,4 @@ public class MainWindow {
 		});
 		mnHelp.add(mntmAbout);
 	}
-
 }

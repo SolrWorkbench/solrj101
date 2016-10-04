@@ -1,6 +1,15 @@
 package lefty.im.solrj101.config;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.client.solrj.request.CoreAdminRequest;
+import org.apache.solr.client.solrj.response.CoreAdminResponse;
+import org.apache.solr.client.solrj.response.RangeFacet.Date;
+import org.apache.solr.common.params.CoreAdminParams.CoreAdminAction;
 
 public class SOLRServer {
 	// URL or IP address of the server
@@ -41,11 +50,63 @@ public class SOLRServer {
 	 *    false: in case of any problem; private ArrayList<SOLRCore> cores   is left unchanged
 	 */
 	public boolean buildCoreList(){
-		ArrayList<SOLRCore> detectedCores= new ArrayList<SOLRCore>();
 		
-		// TODO enter code here
-		
-		
+			String fullUrl = dnsName + ":" + myPortNumber + "/solr/";
+			CoreAdminResponse cores = null;
+			HttpSolrClient solrClient = new HttpSolrClient.Builder(fullUrl).build();
+			CoreAdminRequest request = new CoreAdminRequest();
+			request.setAction(CoreAdminAction.STATUS);
+
+			try {
+				cores = request.process(solrClient);
+				
+			} catch (SolrServerException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			System.out.println("Listing cores");
+			List<String> coreList = new ArrayList<String>();
+			for (int i = 0; i < cores.getCoreStatus().size(); i++) {
+				
+				String name=cores.getCoreStatus().getName(i);
+				
+				String coreStatus=cores.getCoreStatus(name).toString();
+				
+				System.out.println(name);
+				System.out.println(coreStatus);
+
+						
+				SOLRCore newCore = new SOLRCore(name);
+				String config = (String) cores.getCoreStatus(name).get("config");
+				String datadir = cores.getCoreStatus(name).get("dataDir").toString();
+				//CoreIndex index = (CoreIndex) cores.getCoreStatus(name).get("index");
+				String instanceDir = cores.getCoreStatus(name).get("instanceDir").toString();
+				//String myName = null;
+				//String localName = null;
+				String schema = cores.getCoreStatus(name).get("schema").toString();
+				String kickoffTime = cores.getCoreStatus(name).get("startTime").toString();
+				String uptime = cores.getCoreStatus(name).get("uptime").toString();
+				//CoreUserData userData = (CoreUserData) cores.getCoreStatus(name).get("userData");
+				
+				newCore.setConfig(config);
+				newCore.setDatadir(datadir);
+				//newCore.setIndex(index);
+				newCore.setInstanceDir(instanceDir);
+				//newCore.setMyName(myName);
+				///newCore.setName(localName);
+				newCore.setSchema(schema);
+				newCore.setStartTime(kickoffTime);
+				newCore.setUptime(uptime);
+				//newCore.setUserData(userData);
+				
+				
+				
+				this.cores.add(newCore);
+				}
+			
+					
 		return true;
 	}
 	

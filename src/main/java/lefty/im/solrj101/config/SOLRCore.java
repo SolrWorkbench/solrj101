@@ -1,5 +1,7 @@
 package lefty.im.solrj101.config;
 
+import java.util.Date;
+
 public class SOLRCore {
 	private String myName; // human name of the core
 	
@@ -16,6 +18,11 @@ public class SOLRCore {
 	
 	
 	
+	@Override
+	public String toString() {
+		return myName;
+	}
+
 	SOLRCore(String coreName){
 		myName=coreName;
 	}
@@ -72,8 +79,8 @@ public class SOLRCore {
 		return startTime;
 	}
 
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
+	public void setStartTime(String startTime2) {
+		this.startTime = startTime2;
 	}
 
 	public String getUptime() {

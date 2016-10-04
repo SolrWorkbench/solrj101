@@ -19,13 +19,20 @@ public class App {
 		
 
 //		Utils101.connectAndQuery();
-		GetCores.getCores();
+		//String SOLR_URL = "http://ec2-52-11-184-249.us-west-2.compute.amazonaws.com";
 		
-		SOLRServer server = new SOLRServer("Apollo","",8983);
+		//GetCores.getCores(SOLR_URL, 8983);
+		
+		SOLRServer server = new SOLRServer("Apollo","http://ec2-52-11-184-249.us-west-2.compute.amazonaws.com",8983);
+		
+		
 		if (server.buildCoreList()){
 			ArrayList<SOLRCore> listCores= server.getCores();
 			for (SOLRCore c:listCores){
 				System.out.println(c.getMyName()+"-"+c.getName());
+				System.out.println("Config: "+c.getConfig());
+				System.out.println("Start time: "+c.getStartTime());
+				System.out.println("Uptime: "+c.getUptime());
 			}
 			
 		}
